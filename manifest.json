@@ -1,0 +1,38 @@
+{
+    "manifest_version": 2,
+
+    "description": "Преобразование таблицы или ее части в графики",
+
+    "content_scripts": [
+        {
+            "js": ["src/jquery-2.1.4.js","src/content.js"],
+            "css": ["src/content.css"],
+            "matches": [ "*://*/*", "file://*/*"]
+        }
+    ],
+
+    "background": {
+        "page": "src/background.html",
+        "persistent": true
+    },
+
+    "permissions": [
+        "clipboardWrite",
+        "contextMenus"
+    ],
+
+    "icons": {
+        "16": "img/ico16.png",
+        "48": "img/ico48.png",
+        "128": "img/ico128.png"
+    },
+
+    "name": "Table to diagram",
+    "version": "1",
+
+    "browser_action": {
+        "default_title": "Визуализация табличных данных.\nДипломная работа.",
+        "default_icon": "img/ico48.png",
+        "default_popup": "src/popup.html"
+    }
+}
