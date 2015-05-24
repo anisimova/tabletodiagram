@@ -331,7 +331,7 @@
         selection = null;
         //clear array
         valueTab =[];
-        alert('array clear'+ valueTab);
+        //alert('array clear'+ valueTab);
     };
 
 // Command helpers
@@ -342,7 +342,7 @@
         $('.selectTable_A').each(function(){ 
             valueTab.push( $(this).text()); 
         });
-        alert('6 element'+ valueTab[5]);
+        alert('2 element '+ valueTab[1]);
     }
 
     // Select a row, a column or a whole table. Брать строку, столбец или всю таблицу
