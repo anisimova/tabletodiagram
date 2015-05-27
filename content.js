@@ -34,7 +34,7 @@
         return a;
     };
 
-    // Split a string into words. разрезать строку по буквам
+    // Split a string into words. разрезать строку по словам
     var $W = function(str) {
         return (str || "").split(/\s+/);
     };
@@ -343,6 +343,12 @@
             valueTab.push( $(this).text()); 
         });
         alert('2 element '+ valueTab[1]);
+        /*chrome.runtime.onMessage.addListener(function(msg, sender, response){
+           if ((msg.from === 'popup') && (msg.subject === 'table')){
+            response(valueTab);
+            } 
+        });*/
+        
     }
 
     // Select a row, a column or a whole table. Брать строку, столбец или всю таблицу
@@ -379,18 +385,21 @@
 
     // Menu event handler (from the background script). Меню обработчиков события 
     chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-        if(!selectionInit(lastEvent)) {
-            selectionReset();
-            return;
-        }
-        switch(message.menuCommand) {
-            case "selectRow":
-            case "selectColumn":
-            case "selectTable":
-                doSelect(message.menuCommand, true);
-                break;
-        }
-        sendResponse({});
+            if(!selectionInit(lastEvent)) {
+                selectionReset();
+                return;
+            }
+            if ((message.from === 'popup') && (message.subject === 'Table')) {
+                sendResponse(valueTab);
+            }
+            switch(message.menuCommand) {
+                case "selectRow":
+                case "selectColumn":
+                case "selectTable":
+                    doSelect(message.menuCommand, true);
+                    break;
+            }
+            sendResponse({});
     });
 
     // `mouseDown` - init selection. нажать кнопку мыши
@@ -434,7 +443,8 @@
         selectionUpdate(e);
         e.preventDefault();
         e.stopPropagation();
-    };
+    };/*
+    */
 
     // `mouseUp` - stop selecting. отпустить кнопку
     var onMouseUp = function(e) {
@@ -446,22 +456,9 @@
                 addClass(td, clsSelected);
             });
 
-        document.removeEventListener("mousemove", onMouseMove);
+        document.removeEventListener("mousemove", onMouseMove);/**/
         document.removeEventListener("mouseup", onMouseUp);
     };
-
-    // `doubleClick` - select columns and rows. двойной клик
-    var onDblClick = function(e) {
-        if(!selection) {
-            return;
-        }
-        var ctrl = (navigator.userAgent.indexOf("Macintosh") > 0) ? e.metaKey : e.ctrlKey;
-        doSelect(ctrl ? "selectRow" : "selectColumn", true);
-        e.preventDefault();
-        e.stopPropagation();
-    };
-
-
 
     // `contextMenu` - enable/disable extension-specific commands. показать/скрыть команды
     var onContextMenu = function(e) {
@@ -480,8 +477,14 @@
     // ---------------------------
 
     document.body.addEventListener("mousedown", onMouseDown, true);
-    document.body.addEventListener("dblclick", onDblClick);
     document.body.addEventListener("contextmenu", onContextMenu);
 
-})();
+    /* Inform the backgrund page that 
+     * this tab should have a page-action */
+    chrome.runtime.sendMessage({
+        from:    'content',
+        subject: 'showBrowserAction'
+    });
 
+
+})();
