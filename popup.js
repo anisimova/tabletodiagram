@@ -4,122 +4,64 @@
 
 function create(valueTab) {
     //$('#name').text('diagram');
-    $.each(valueTab, function(){
+    /**/
+    //бар
+    var valueTab1 =[];
+    var dataTab1 = [];
+    var dataTab2 = [];
+    for (var i = 0; i < valueTab.length; i++) {
+        /*valueTab1[i] = parseInt(valueTab[i+1], 10);*/
+        valueTab[i+1] = parseInt(valueTab[i+1],10);
+        dataTab1.push(valueTab[i]);
+        dataTab2.push(valueTab[i+1]);
+        i++;
+    };
+    /*$.each(dataTab1, function(){
         $('#tabledata').append('<p>' + this + '</p>');
     });
-//линии - не работает?!
-    var lineChartData = {
-            labels : ["January","February","March","April","May","June","July"],
-            datasets : [
-                {
-                    label: "My First dataset",
-                    fillColor : "rgba(220,220,220,0.2)",
-                    strokeColor : "rgba(220,220,220,1)",
-                    pointColor : "rgba(220,220,220,1)",
-                    pointStrokeColor : "#f00",
-                    pointHighlightFill : "#a00",
-                    pointHighlightStroke : "rgba(220,220,220,1)",
-                    data : [30,50,22,10,90,35,0]
+   $.each(dataTab2, function(){
+        $('#tabledata').append('<p>' + this + '</p>');
+    });*/
+        window.oninput = function() {
+        var idColor = document.getElementById('titleChart').value;
+        
+
+    
+    var aaaa = [0.1, 0.15, 0.5, 0.86, 0.17, 0.61];
+    $('#container').highcharts({
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: idColor
+        },
+        xAxis: {
+            categories: dataTab1
+        },
+        yAxis: {
+            title: {
+                text: ''
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
                 },
-                {
-                    label: "My Second dataset",
-                    fillColor : "rgba(151,187,205,0.2)",
-                    strokeColor : "rgba(151,187,205,1)",
-                    pointColor : "rgba(151,187,205,1)",
-                    pointStrokeColor : "#0f0",
-                    pointHighlightFill : "#0a0",
-                    pointHighlightStroke : "rgba(151,187,205,1)",
-                    data : [60,90,10,25,15,75,0]
-                }
-            ]
-
-    };
-    
-    var ctx = document.getElementById("chart").getContext("2d");
-    window.myLine = new Chart(ctx).Line(lineChartData, {responsive: true});
-    
-//просто канвас - работает
-    /*var c = document.getElementById("chart");
-    var ctx = c.getContext("2d");
-    ctx.fillStyle = "#FF0000";
-    ctx.fillRect(0,0,150,75);*/
-//pie-работает
-    /*var pieData = [
-                    {
-                        value: 300,
-                        color:"#F7464A",
-                        highlight: "#FF5A5E",
-                        label: "Red"
-                    },
-                    {
-                        value: 50,
-                        color: "#46BFBD",
-                        highlight: "#5AD3D1",
-                        label: "Green"
-                    },
-                    {
-                        value: 100,
-                        color: "#FDB45C",
-                        highlight: "#FFC870",
-                        label: "Yellow"
-                    },
-                    {
-                        value: 40,
-                        color: "#949FB1",
-                        highlight: "#A8B3C5",
-                        label: "Grey"
-                    },
-                    {
-                        value: 120,
-                        color: "#4D5360",
-                        highlight: "#616774",
-                        label: "Dark Grey"
-                    }
-
-    ];
-    var ctx = document.getElementById("chart").getContext("2d");
-    window.myPie = new Chart(ctx).Pie(pieData);
-    */
-//бублик - работает
-    /*var doughnutData = [
-                    {
-                        value: 300,
-                        color:"#F7464A",
-                        highlight: "#FF5A5E",
-                        label: "Red"
-                    },
-                    {
-                        value: 50,
-                        color: "#46BFBD",
-                        highlight: "#5AD3D1",
-                        label: "Green"
-                    },
-                    {
-                        value: 100,
-                        color: "#FDB45C",
-                        highlight: "#FFC870",
-                        label: "Yellow"
-                    },
-                    {
-                        value: 40,
-                        color: "#949FB1",
-                        highlight: "#A8B3C5",
-                        label: "Grey"
-                    },
-                    {
-                        value: 120,
-                        color: "#4D5360",
-                        highlight: "#616774",
-                        label: "Dark Grey"
-                    }
-
-    ];
-    var ctx = document.getElementById("chart").getContext("2d");
-    window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, {responsive : true});
-    */
-
-
+                enableMouseTracking: false
+            }
+        },
+        series: [/*{
+            name: 'Tokyo',
+            data: aaaa
+        }, */{
+            name: 'London',
+            data: dataTab2
+        }]
+    });
 }
+
+};
 
 /* Once the DOM is ready... */
 window.addEventListener('DOMContentLoaded', function() {

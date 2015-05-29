@@ -38,7 +38,6 @@
     var $W = function(str) {
         return (str || "").split(/\s+/);
     };
-
     // Shortcut for getElementsByClassName.
     var $C = function(cls, where) {
         return $A([], (where || document).getElementsByClassName(cls));
@@ -141,7 +140,6 @@
         var r = el.getBoundingClientRect();
         return [r.left, r.top, r.right, r.bottom];
     };
-
     // True if two rectangles intersect. Пересекаются ли два элемента
     var intersect = function(a, b) {
         return !(a[0] >= b[2] || a[2] <= b[0] || a[1] >= b[3] || a[3] <= b[1])
@@ -161,6 +159,7 @@
     var isSelected = function(el) {
         return el ? (el.className || "").indexOf("selectTable") >= 0 : false;
     };
+
 
 // Scrolling
     // ---------------------------
@@ -343,12 +342,9 @@
             valueTab.push( $(this).text()); 
         });
         alert('2 element '+ valueTab[1]);
-        /*chrome.runtime.onMessage.addListener(function(msg, sender, response){
-           if ((msg.from === 'popup') && (msg.subject === 'table')){
-            response(valueTab);
-            } 
-        });*/
-        
+        /*for (var i = 0; i < valueTab.length; i++) {
+            alert(valueTab[i]);
+        };*/
     }
 
     // Select a row, a column or a whole table. Брать строку, столбец или всю таблицу

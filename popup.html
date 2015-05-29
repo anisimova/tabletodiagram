@@ -3,32 +3,27 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <script type="text/javascript" src="jquery-2.1.4.js"></script>
-        <script type="text/javascript" src="Chart.js"></script>
+        <script src="highcharts.js"></script>
+        <script src="exporting.js"></script>
         <script type="text/javascript" src="popup.js"></script>
         <style type="text/css">
-        body{}
+            body {
+                font-style: "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
+                font-size: 11pt;
+            }
+            #name{
+                text-align: center;
+                font-size: 14pt;
+            }
+            p{
+                margin: 3px 0;
+            }
         </style>
     </head>
     <body>
-        <!--
-            <h3 style="font-weight:bold; text-align:center;">DOM Info</h3>
-            <table border="1" cellpadding="3" style="border-collapse:collapse;">
-                <tr>
-                    <td nowrap>Total number of elements:</td>
-                    <td align="right"><span id="total">N/A</span></td>
-                </tr>
-                <tr>
-                    <td nowrap>Number of input elements:</td>
-                    <td align="right"><span id="inputs">N/A</span></td>
-                </tr>
-                <tr>
-                    <td nowrap>Number of button elements:</td>
-                    <td align="right"><span id="buttons">N/A</span></td>
-                </tr>
-            </table> 
-        -->
-        <h3 id="name">Диаграмма</h3>
+        <p id="name">Полученная диаграмма:</p>
         <div id="tabledata"></div>
-        <canvas id="chart"></canvas>
+        <input type="text" id="titleChart" placeholder="Введите название диаграммы"/>
+        <div id="container" style="min-width: 410px; height: 400px; margin: 0 auto"></div>
     </body>
 </html>
